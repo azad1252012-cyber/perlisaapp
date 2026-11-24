@@ -20,6 +20,7 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
+          flutter-version: '3.29.3'
           channel: stable
 
       - name: Extract source
@@ -28,9 +29,12 @@ jobs:
       - name: Prepare Android
         working-directory: perlisa_offline
         run: |
-          flutter create --platforms=android --org ir.perlisa --project-name perlisa .
-          flutter pub add file_picker
-          sed -i 's/FilePicker\.platform\.pickFiles/FilePicker.pickFiles/g' lib/main.dart
+          rm -rf android .dart_tool build
+          rm -f pubspec.lock
+          flutter create --platforms=android --org ir.perlisa --project-name perlisa --no-pub .
+          flutter pub add file_picker:8.3.7
+          flutter pub add flutter_plugin_android_lifecycle:2.0.28
+          flutter clean
           flutter pub get
 
       - name: Build APK
