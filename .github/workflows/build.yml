@@ -30,6 +30,7 @@ jobs:
         run: |
           flutter create --platforms=android --org ir.perlisa --project-name perlisa .
           flutter pub add file_picker
+          sed -i 's/FilePicker\.platform\.pickFiles/FilePicker.pickFiles/g' lib/main.dart
           flutter pub get
 
       - name: Build APK
