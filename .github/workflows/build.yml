@@ -29,6 +29,7 @@ jobs:
         working-directory: perlisa_offline
         run: |
           flutter create --platforms=android --org ir.perlisa --project-name perlisa .
+          flutter pub add file_picker
           flutter pub get
 
       - name: Build APK
@@ -40,4 +41,3 @@ jobs:
         with:
           name: Perlisa-APK
           path: perlisa_offline/build/app/outputs/flutter-apk/app-release.apk
-
